@@ -1,6 +1,7 @@
 /*
- * 此代码用于测试 CPU 的运算能力
- * 用法：直接运行程序即可。
+ * test your cpu speed
+ * gcc -O2 -o test test.c
+ * ./test
  */
 #include <stdio.h>
 #include <time.h>
@@ -23,7 +24,7 @@ int main(int argv, char **argc){
 	unsigned char *buf;
 	r = 0.0;
 	max = 0.0;
-	count = 4000; /* 一个计算周期的测试次数 */
+	count = 4000;
 	bufsize = 1024 * 1024;
 	buf = (unsigned char *)malloc(bufsize * sizeof(char));
 	if (NULL == (fp = fopen("test.dat", "rb"))){
@@ -38,7 +39,7 @@ int main(int argv, char **argc){
 		free(buf);
 		return 0;
 	}
-	printf("程序正在运行，请关闭其它程序等待结果。\n");
+	printf("Program is running...\n");
 	for(j = 0; j < 10; j++){
 		printf("No%d:\n", j + 1);
 		start = clock();
@@ -50,7 +51,7 @@ int main(int argv, char **argc){
 		if (r > max){
 			max = r;
 		}
-		printf("RES = %d\n循环次数 %d\n总时间 %.0f 毫秒\n平均 %.6f 次/毫秒，最快 %.6f 次 / 毫秒\n\n", res, count, (float)difftime(end, start), r, max);
+		printf("RES = %d\nLoop: %d\nTotal time %.0f ms\nAvg %.6f / ms, Fastest %.6f / ms\n\n", res, count, (float)difftime(end, start), r, max);
 	}
 	free(buf);
 	return 0;
